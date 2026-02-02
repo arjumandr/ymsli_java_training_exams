@@ -9,7 +9,7 @@
         </Console>
     </Appenders>
     <Loggers>
-   <Logger name="com.bankapp.service" level="debug"/>
+   <Logger name="com.bookStore.service" level="debug"/>
         <Root level="error">
             <AppenderRef ref="STDOUT"/>
             <AppenderRef ref="FILE"/>

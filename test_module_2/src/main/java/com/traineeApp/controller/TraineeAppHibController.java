@@ -4,13 +4,19 @@ import com.traineeApp.dao.DaoException;
 import com.traineeApp.dao.TraineeDao;
 import com.traineeApp.dao.TraineeDaoHibImpl;
 import com.traineeApp.dto.Trainee;
+import com.traineeApp.service.TraineeAppService;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class TraineeAppHibController {
 	public static void main(String[] args) {
 
 		TraineeDao traineeDao = new TraineeDaoHibImpl();
-		
-		Trainee trainee = new Trainee("AR R", "Node.js", 20);
+		final Logger logger = LogManager.getLogger(TraineeAppService.class);
+
+		Trainee trainee = new Trainee("Some person", "Deep learning", 90);
+		logger.info("Adding some trainee.");
 		try {
 			trainee = traineeDao.addTrainee(trainee);
 		} catch (DaoException e) {
@@ -22,6 +28,7 @@ public class TraineeAppHibController {
 		System.out.println("Trainee with id = 1");
 		Trainee t1;
 		try {
+			logger.info("Searching for some trainee.");
 			t1 = traineeDao.findTraineeById(1);
 			System.out.println(t1);
 		} catch (DaoException e) {

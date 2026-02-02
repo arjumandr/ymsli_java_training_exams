@@ -21,7 +21,8 @@ public class TraineeDaoJdbcImpl implements TraineeDao {
 	public Trainee findTraineeById(int traineeId) throws DaoException{
 		Trainee trainee = new Trainee();
 		try {
-			PreparedStatement psmt = connection.prepareStatement("select * from trainee where trainee_id = ?", Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement psmt = connection.prepareStatement("select * from trainee where trainee_id = ?", 
+					Statement.RETURN_GENERATED_KEYS);
 			psmt.setInt(1, traineeId);
 			ResultSet rs = psmt.executeQuery();
 			if(rs.next()) {
@@ -30,6 +31,7 @@ public class TraineeDaoJdbcImpl implements TraineeDao {
 				trainee.setBranch(rs.getString(3));
 				trainee.setPercentage(rs.getDouble(4));
 			}
+			psmt.close();
 		} catch (SQLException e) {
 			throw new DaoException("Unable to find trainee with this id", e);
 		}
@@ -51,6 +53,7 @@ public class TraineeDaoJdbcImpl implements TraineeDao {
 			if(rs.next()) {
 				trainee.setTrainee_id(rs.getInt(1));
 			}
+			psmt.close();
 		} catch(SQLException e) {
 			throw new DaoException("Unable to add trainee", e);
 		}

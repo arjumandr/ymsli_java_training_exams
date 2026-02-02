@@ -9,7 +9,6 @@ import com.traineeMgmtApp.dao.TraineeDao;
 import com.traineeMgmtApp.dto.Trainee;
 
 @Service
-@EnableAspectJAutoProxy
 
 public class TraineeService {
 	private final TraineeDao traineeRepo;

@@ -9,7 +9,8 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "trainee")
 public class Trainee {
-	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int trainee_id;
     private String trainee_name;
     private String branch;

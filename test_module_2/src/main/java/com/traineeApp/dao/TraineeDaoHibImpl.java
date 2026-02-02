@@ -31,7 +31,7 @@ public class TraineeDaoHibImpl implements TraineeDao {
 	}
 
 	@Override
-	public Trainee addTrainee(Trainee trainee) throws PersistenceException{
+	public Trainee addTrainee(Trainee trainee) throws PWrapperException{
 		EntityManager em=entityManagerFactory.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		try {

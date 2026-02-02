@@ -1,21 +1,28 @@
 package com.traineeApp.controller;
 
-import com.traineeApp.dao.*;
+import com.traineeApp.dao.DaoException;
+import com.traineeApp.dao.PWrapperException;
+import com.traineeApp.dao.TraineeDao;
+import com.traineeApp.dao.TraineeDaoHibImpl;
 import com.traineeApp.dto.Trainee;
 
 public class TraineeAppJdbcController {
 	
 	public static void main(String[] args) {
 		
-		TraineeDao traineeDao = new TraineeDaoJdbcImpl();
+		TraineeDao traineeDao = new TraineeDaoHibImpl();
+		
+//		TraineeDao traineeDao = new TraineeDaoJdbcImpl();
 //		
 //		Trainee trainee = new Trainee("AR", "Java", 50);
 //		trainee = traineeDao.addTrainee(trainee);
 		
-		Trainee trainee2 = new Trainee("PQRS", "REact", 40);
+		Trainee trainee2 = new Trainee("New Person", "full stack", 44.44);
 		try {
 			trainee2 = traineeDao.addTrainee(trainee2);
 		} catch (DaoException e) {
+			e.printStackTrace();
+		} catch (PWrapperException e) {
 			e.printStackTrace();
 		}
 
