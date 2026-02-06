@@ -18,10 +18,14 @@ public class TraineeController {
     @Autowired
     private TraineeService traineeService;
 
+//    @PostMapping
+//    public ResponseEntity<Trainee> addTrainee(@RequestBody Trainee trainee) {
+//    	traineeService.addTrainee(trainee);
+//        return ResponseEntity.ok(trainee);
+//    }
     @PostMapping
-    public ResponseEntity<Trainee> addTrainee(@RequestBody Trainee trainee) {
+    public void addTrainee(@RequestBody Trainee trainee) {
     	traineeService.addTrainee(trainee);
-        return ResponseEntity.ok(trainee);
     }
 
     @GetMapping("/{id}")

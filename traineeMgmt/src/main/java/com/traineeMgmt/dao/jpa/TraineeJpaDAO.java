@@ -1,18 +1,25 @@
 package com.traineeMgmt.dao.jpa;
 
-import org.springframework.context.annotation.Primary;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.traineeMgmt.dao.TraineeDao;
 import com.traineeMgmt.entities.Trainee;
 import com.traineeMgmt.exception.TraineeDataAccessException;
+import com.traineeMgmt.exception.TraineeNotFoundException;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.PersistenceException;
 
 @Repository
-@Primary
+@ConditionalOnProperty(name = "trainee.dao.type", havingValue = "jpa")
+//@ConditionalOnProperty(
+//	    name = "trainee.dao.type",
+//	    havingValue = "jpa"
+//	)
+//@Primary
 public class TraineeJpaDAO implements TraineeDao {
     @PersistenceContext
     private EntityManager em;
@@ -30,6 +37,8 @@ public class TraineeJpaDAO implements TraineeDao {
     public Trainee findById(Integer id) {
         try {
             return em.find(Trainee.class, id);
+        }catch(EmptyResultDataAccessException e) {
+        	throw new TraineeNotFoundException("Trainee with this Id not found.");
         } catch (PersistenceException e) {
             throw new TraineeDataAccessException("Error finding trainee", e);
         }
